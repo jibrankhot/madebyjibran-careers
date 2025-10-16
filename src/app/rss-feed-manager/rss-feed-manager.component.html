@@ -1,1 +1,42 @@
-<p>rss-feed-manager-component works!</p>
+<section class="rss-manager">
+    <h2>Manage Feeds</h2>
+
+    <form (ngSubmit)="saveFeed()" class="feed-form">
+        <label>Portal</label>
+        <select [(ngModel)]="feed.portal" name="portal" required>
+            <option value="">Select Portal</option>
+            <option value="LinkedIn">LinkedIn</option>
+            <option value="Naukri">Naukri</option>
+            <option value="Indeed">Indeed</option>
+        </select>
+
+        <label>Keywords</label>
+        <input type="text" [(ngModel)]="feed.keywords" name="keywords" placeholder="e.g. Angular, SQL" required />
+
+        <label>Location</label>
+        <input type="text" [(ngModel)]="feed.location" name="location" placeholder="e.g. Thane, Remote" required />
+
+        <div class="btn-row">
+            <button type="button" (click)="generateUrl()">Generate URL</button>
+            <button type="submit">Save Feed</button>
+        </div>
+
+        <div *ngIf="feed.feedUrl" class="feed-url">
+            <p><strong>Generated Feed URL:</strong></p>
+            <code>{{ feed.feedUrl }}</code>
+        </div>
+    </form>
+
+    <div class="saved-feeds" *ngIf="savedFeeds.length > 0">
+        <h3>Saved Feeds</h3>
+        <ul>
+            <li *ngFor="let item of savedFeeds; let i = index">
+                <div>
+                    <strong>{{ item.portal }}</strong> — {{ item.keywords }} ({{ item.location }})
+                </div>
+                <small>{{ item.feedUrl }}</small>
+                <button (click)="deleteFeed(i)">Delete</button>
+            </li>
+        </ul>
+    </div>
+</section>

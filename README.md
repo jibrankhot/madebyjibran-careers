@@ -1,27 +1,44 @@
-# MadeByJibranCareers
+# MadeByJibran Careers
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.17.
+**A unified job discovery platform inspired by LinkedIn, Naukri, and Indeed — built with Angular.**
 
-## Development server
+MadeByJibran Careers brings together job listings, profiles, and application tracking in one seamless interface. It’s designed to provide a centralized view of job opportunities from multiple platforms — all in one place.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+---
 
-## Code scaffolding
+## 🚀 Features
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- 🔎 Unified job listing interface
+- 📄 Profile & resume viewer
+- ✅ Job application tracker
+- 🌐 Integration-ready architecture
+- ⚡ Built with Angular for high performance
+- 🎯 Clean, responsive UI
 
-## Build
+---
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## 🛠️ Tech Stack
 
-## Running unit tests
+- **Frontend:** Angular (vX.X)
+- **Styles:** SCSS / Tailwind / Bootstrap *(your choice)*
+- **APIs:** [Custom or integrated – specify if needed]
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+---
 
-## Running end-to-end tests
+## 📦 Getting Started
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+```bash
+# Clone the repo
+git clone https://github.com/your-username/madebyjibran-careers.git
 
-## Further help
+# Navigate into the directory
+cd madebyjibran-careers
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+# Install dependencies
+npm install
+
+# Run the development server
+ng serve
+git fetch origin
+git reset --hard origin/main
+git push -u origin main --force

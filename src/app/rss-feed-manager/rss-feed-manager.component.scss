@@ -1,0 +1,80 @@
+.rss-manager {
+  max-width: 700px;
+  margin: 2rem auto;
+  background: #fff;
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+
+  h2 { color: #673ab7; text-align: center; margin-bottom: 1rem; }
+
+  .feed-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    label { font-weight: 500; color: #555; }
+    input, select {
+      padding: 0.6rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    .btn-row {
+      display: flex;
+      gap: 1rem;
+
+      button {
+        padding: 0.7rem 1.2rem;
+        border: none;
+        border-radius: 6px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: 0.3s;
+
+        &:first-child { background: #ffca28; color: #333; }
+        &:first-child:hover { background: #e6b800; }
+
+        &:last-child { background: #673ab7; color: #fff; }
+        &:last-child:hover { background: #5a2ba1; }
+      }
+    }
+
+    .feed-url {
+      background: #f0f0f0;
+      padding: 0.8rem;
+      border-radius: 6px;
+      code { word-break: break-all; }
+    }
+  }
+
+  .saved-feeds {
+    margin-top: 2rem;
+
+    h3 { color: #673ab7; margin-bottom: 1rem; }
+
+    ul { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 0.8rem; }
+
+    li {
+      padding: 0.8rem;
+      border: 1px solid #eee;
+      border-radius: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+
+      button {
+        align-self: flex-start;
+        padding: 0.4rem 0.8rem;
+        background: #e53935;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 0.8rem;
+
+        &:hover { background: #c62828; }
+      }
+    }
+  }
+}

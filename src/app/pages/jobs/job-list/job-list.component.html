@@ -1,1 +1,15 @@
-<p>job-list works!</p>
+<section class="job-list">
+    <h2>All Jobs</h2>
+
+    <div *ngIf="jobs.length === 0">
+        No jobs found. Add feeds first.
+    </div>
+
+    <ul *ngIf="jobs.length > 0">
+        <li *ngFor="let job of jobs">
+            <h3>{{ job.title }}</h3>
+            <p>{{ job.company }} — {{ job.location }} ({{ job.portal }})</p>
+            <a [href]="job.link" target="_blank">View Job</a>
+        </li>
+    </ul>
+</section>
