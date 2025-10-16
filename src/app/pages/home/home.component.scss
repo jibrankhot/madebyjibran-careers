@@ -1,0 +1,31 @@
+.home {
+  text-align: center;
+  margin-top: 5rem;
+
+  h2 { font-size: 2rem; color: #673ab7; }
+  p { margin: 1rem auto; max-width: 600px; color: #555; font-size: 1rem; }
+
+  .cta {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+
+    .btn {
+      background: #673ab7;
+      color: white;
+      padding: 0.8rem 1.5rem;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: 0.3s;
+
+      &:hover { background: #5a2ba1; }
+
+      &.secondary {
+        background: #009688;
+        &:hover { background: #00796b; }
+      }
+    }
+  }
+}
