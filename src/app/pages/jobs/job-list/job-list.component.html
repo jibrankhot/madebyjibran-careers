@@ -1,15 +1,17 @@
-<section class="job-list">
-    <h2>All Jobs</h2>
+<div class="job-list-container">
+    <h2>Job List</h2>
 
-    <div *ngIf="jobs.length === 0">
-        No jobs found. Add feeds first.
+    <div class="add-job-form">
+        <input type="text" [(ngModel)]="newJobTitle" placeholder="Job Title" />
+        <input type="text" [(ngModel)]="newJobCompany" placeholder="Company" />
+        <input type="text" [(ngModel)]="newJobLocation" placeholder="Location" />
+        <button (click)="addJob()">Add Job</button>
     </div>
 
-    <ul *ngIf="jobs.length > 0">
+    <ul class="jobs">
         <li *ngFor="let job of jobs">
-            <h3>{{ job.title }}</h3>
-            <p>{{ job.company }} — {{ job.location }} ({{ job.portal }})</p>
-            <a [href]="job.link" target="_blank">View Job</a>
+            <strong>{{ job.title }}</strong> - {{ job.company }} ({{ job.location }})
+            <button (click)="deleteJob(job.id)">Delete</button>
         </li>
     </ul>
-</section>
+</div>

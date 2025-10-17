@@ -5,7 +5,7 @@ import { JobListComponent } from './pages/jobs/job-list/job-list.component';
 import { SettingsComponent } from './pages/settings/settings/settings.component';
 import { RssFeedManagerComponent } from './rss-feed-manager/rss-feed-manager.component';
 
-export const routes: Routes = [
+const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
     { path: 'home', component: HomeComponent },
     { path: 'feeds', component: RssFeedManagerComponent },
