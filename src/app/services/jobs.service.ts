@@ -1,18 +1,19 @@
 import { Injectable, inject } from '@angular/core';
-import { Database, ref, get, child, onValue } from '@angular/fire/database';
-import { Observable } from 'rxjs';
+import { Database, ref, get, set } from '@angular/fire/database';
 
 @Injectable({ providedIn: 'root' })
 export class JobsService {
     private db = inject(Database);
 
-    getJobs(): Observable<any[]> {
-        return new Observable(observer => {
-            const jobsRef = ref(this.db, 'jobs');
-            onValue(jobsRef, snapshot => {
-                const data = snapshot.val();
-                observer.next(data ? Object.values(data) : []);
-            });
-        });
+    // Returns a Promise<DataSnapshot>
+    getJobs() {
+        const jobsRef = ref(this.db, 'jobs');
+        return get(jobsRef);
+    }
+
+    // Add a new job
+    async addJob(job: { title: string; company: string; location: string }) {
+        const jobRef = ref(this.db, `jobs/${Date.now()}`); // create new path with timestamp
+        await set(jobRef, job); // ✅ use the modular set() function
     }
 }

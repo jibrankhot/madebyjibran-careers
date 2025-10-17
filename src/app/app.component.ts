@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { JobsService } from './services/jobs.service';
 import { RouterModule } from '@angular/router';
+import { JobsService } from './services/jobs.service';
 
 @Component({
   selector: 'app-root',
@@ -10,16 +10,27 @@ import { RouterModule } from '@angular/router';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   jobs: any[] = [];
-
-  constructor(private jobsService: JobsService) { }
+  private jobsService = inject(JobsService);
 
   ngOnInit() {
-    this.jobsService.getJobs().subscribe(jobs => {
-      this.jobs = jobs;
+    this.loadJobs();
+  }
+
+  async loadJobs() {
+    try {
+      const snapshot = await this.jobsService.getJobs();
+      if (snapshot.exists()) {
+        const jobsData = snapshot.val();
+        // Convert object to array
+        this.jobs = Object.keys(jobsData).map(key => jobsData[key]);
+      } else {
+        this.jobs = [];
+      }
       console.log('Loaded jobs:', this.jobs);
-    });
+    } catch (error) {
+      console.error('Error loading jobs:', error);
+    }
   }
 }
-

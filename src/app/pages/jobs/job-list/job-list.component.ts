@@ -12,6 +12,7 @@ import { CommonModule } from '@angular/common';
 })
 export class JobListComponent implements OnInit {
   private firebase = inject(FirebaseService);
+
   jobs: any[] = [];
   newJobTitle = '';
   newJobLocation = '';
@@ -21,20 +22,26 @@ export class JobListComponent implements OnInit {
     this.loadJobs();
   }
 
-  loadJobs() {
-    this.firebase.readData('jobs')
-      .then(snapshot => {
-        if (snapshot.exists()) {
-          this.jobs = Object.entries(snapshot.val()).map(([id, job]: [string, any]) => ({ id, ...job }));
-        } else {
-          this.jobs = [];
-        }
-      })
-      .catch(err => console.error(err));
+  async loadJobs() {
+    try {
+      const snapshot = await this.firebase.readData('jobs');
+      if (snapshot.exists()) {
+        this.jobs = Object.entries(snapshot.val()).map(
+          ([id, job]: [string, any]) => ({ id, ...job })
+        );
+      } else {
+        this.jobs = [];
+      }
+    } catch (error) {
+      console.error('Error loading jobs:', error);
+    }
   }
 
-  addJob() {
-    if (!this.newJobTitle || !this.newJobCompany) return alert('Title and Company are required');
+  async addJob() {
+    if (!this.newJobTitle || !this.newJobCompany) {
+      alert('Title and Company are required');
+      return;
+    }
 
     const jobId = `job-${Date.now()}`;
     const newJob = {
@@ -43,15 +50,23 @@ export class JobListComponent implements OnInit {
       company: this.newJobCompany
     };
 
-    this.firebase.writeData(`jobs/${jobId}`, newJob).then(() => {
+    try {
+      await this.firebase.writeData(`jobs/${jobId}`, newJob);
       this.newJobTitle = '';
       this.newJobLocation = '';
       this.newJobCompany = '';
-      this.loadJobs();
-    });
+      await this.loadJobs();
+    } catch (error) {
+      console.error('Error adding job:', error);
+    }
   }
 
-  deleteJob(jobId: string) {
-    this.firebase.deleteData(`jobs/${jobId}`).then(() => this.loadJobs());
+  async deleteJob(jobId: string) {
+    try {
+      await this.firebase.deleteData(`jobs/${jobId}`);
+      await this.loadJobs();
+    } catch (error) {
+      console.error('Error deleting job:', error);
+    }
   }
 }

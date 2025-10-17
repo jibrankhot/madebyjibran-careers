@@ -1,34 +1,30 @@
 import { Injectable, inject } from '@angular/core';
-import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
-import { provideDatabase, getDatabase, ref, set, get, child, update, remove } from '@angular/fire/database';
-import { environment } from '../../environments/environment';
+import { Database, ref, set, get, child, update, remove } from '@angular/fire/database';
 
 @Injectable({
     providedIn: 'root'
 })
 export class FirebaseService {
-    private db = inject(getDatabase);
+    private db = inject(Database);
 
-    constructor() {
-        // Initialize Firebase
-        provideFirebaseApp(() => initializeApp(environment.firebase));
-        provideDatabase(() => getDatabase());
-    }
-
+    // Write data to a specific path
     writeData(path: string, data: any) {
-        return set(ref(this.db(), path), data);
+        return set(ref(this.db, path), data);
     }
 
+    // Read data from a specific path
     readData(path: string) {
-        const dbRef = ref(this.db());
+        const dbRef = ref(this.db);
         return get(child(dbRef, path));
     }
 
+    // Update data at a specific path
     updateData(path: string, data: any) {
-        return update(ref(this.db(), path), data);
+        return update(ref(this.db, path), data);
     }
 
+    // Delete data at a specific path
     deleteData(path: string) {
-        return remove(ref(this.db(), path));
+        return remove(ref(this.db, path));
     }
 }
